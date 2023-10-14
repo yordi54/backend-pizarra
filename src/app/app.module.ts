@@ -19,7 +19,7 @@ import { tokenGetter } from './config/config';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    JwtModule.forRoot({ config: { tokenGetter: tokenGetter, allowedDomains: ['localhost:5000'] } }),
+    JwtModule.forRoot({ config: { tokenGetter: tokenGetter, allowedDomains: ['backend-pizarra.azurewebsites.net'] } }),
   ],
   providers: [],
   bootstrap: [AppComponent],

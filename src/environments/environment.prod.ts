@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
+  production: true,
   url: 'https://backend-pizarra.azurewebsites.net/api',
 };
