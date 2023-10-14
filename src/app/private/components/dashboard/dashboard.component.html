@@ -1,0 +1,63 @@
+<div class="container">
+  <div class="register">
+    <a [routerLink]="['../login']">ir A La Página De Registro</a>
+  </div>
+  <mat-card>
+    <div style="display: flex; flex-direction: row">
+      <div>
+        <div>
+          <span
+            style="display: flex; flex-direction: row; align-items: baseline"
+          >
+            <h2>Mis Salas</h2>
+            <small style="margin-left: 10px"
+              >Iniciaste como {{ user.username }}</small
+            >
+          </span>
+          <button
+            mat-raised-button
+            color="primary"
+            [routerLink]="['../create-room']"
+          >
+            Crear nueva Sala
+          </button>
+        </div>
+
+        <div
+          *ngIf="(rooms$ | async)?.items?.length > 0; else no_rooms"
+          class="rooms"
+        >
+          <mat-selection-list
+            [multiple]="false"
+            (selectionChange)="onSelectRoom($event)"
+          >
+            <mat-list-option
+              *ngFor="let room of (rooms$ | async)?.items"
+              [value]="room"
+            >
+              Nombre: {{ room.name }} Id: {{ room.id }}
+              <mat-divider></mat-divider>
+            </mat-list-option>
+          </mat-selection-list>
+          <mat-paginator
+            [length]="(rooms$ | async)?.meta?.totalItems"
+            [pageIndex]="(rooms$ | async)?.meta?.currentPage"
+            [pageSize]="(rooms$ | async)?.meta?.itemsPerPage"
+            (page)="onPaginateRooms($event)"
+            [pageSizeOptions]="[10, 25, 50]"
+          ></mat-paginator>
+        </div>
+      </div>
+
+    </div>
+  </mat-card>
+</div>
+
+<ng-template #no_rooms>
+  <div style="margin-top: 25px">
+    <mat-error
+      >Hasta el momento no hay salas para usted, cree una o reciba una
+      invitación</mat-error
+    >
+  </div>
+</ng-template>

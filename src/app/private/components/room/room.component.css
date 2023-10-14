@@ -1,0 +1,25 @@
+mat-toolbar {
+  background: #eff1f3;
+}
+
+.circle-red {
+  width: 12px;
+  height: 12px;
+  background: rgb(212, 14, 14);
+  border-radius: 50%;
+  border: red;
+}
+
+.circle-green {
+  width: 12px;
+  height: 12px;
+  background: rgb(33, 225, 33);
+  border-radius: 50%;
+  border: green;
+}
+
+.example-button-row {
+  margin-right: 8px;
+}
+
+

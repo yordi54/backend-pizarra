@@ -1,0 +1,47 @@
+<div class="container">
+    <div>
+      <div class="login">
+        <a [routerLink]="['../login']">Ir A La Página De Inicio De Sesión</a>
+      </div>
+  
+      <div>
+        <mat-card>
+          <mat-card-title>Registro</mat-card-title>
+  
+          <mat-card-content>
+            <form (ngSubmit)="register()" [formGroup]="form">
+              <mat-form-field>
+                <input type="email" matInput placeholder="Correo" [formControl]="email">
+                <mat-error *ngIf="email.touched && email.hasError('required')">El correo es requerido</mat-error>
+                <mat-error *ngIf="email.touched && email.hasError('email')">El correo debe ser válido</mat-error>
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input type="text" matInput placeholder="Nombre de usuario" [formControl]="username">
+                <mat-error *ngIf="username.touched && username.hasError('required')">El nombre de usuario es requerido</mat-error>
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input type="password" matInput placeholder="Contraseña" [formControl]="password">
+                <mat-error *ngIf="password.touched && password.hasError('required')">La contraseña es requerida</mat-error>
+              </mat-form-field>
+  
+              <mat-form-field>
+                <input type="password" matInput placeholder="Confirmar contraseña" [formControl]="passwordConfirm">
+                <mat-error *ngIf="passwordConfirm.touched && form.hasError('matching')">Las contraseñas no coinciden</mat-error>
+              </mat-form-field>
+  
+              <mat-hint *ngIf="!form.valid"><small>Por favor complete toda la información necesaria</small></mat-hint>
+  
+              <div class="button">
+                <button mat-button type="submit" [disabled]="!form.valid">Registrarse</button>
+              </div>
+            </form>
+          </mat-card-content>
+  
+          <mat-card-footer></mat-card-footer>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+  
