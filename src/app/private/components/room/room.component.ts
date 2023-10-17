@@ -48,13 +48,13 @@ export class RoomComponent implements OnInit  {
     this.nameRoom = this.dataRoom['name'];
   }
   ngOnInit(): void {
-    this.diagramService.loadDiagramaDB(parseInt(this.room)).subscribe((res: RoomDiagramI) => {
+    /*this.diagramService.loadDiagramaDB(parseInt(this.room)).subscribe((res: RoomDiagramI) => {
       console.log(res);
       this.diagram?.loadDiagram(res.diagram);
     },
     (err) => {
       console.log(err);
-    });
+    });*/
   }
 
   @ViewChild('diagram', { static: false })
@@ -85,9 +85,9 @@ export class RoomComponent implements OnInit  {
     this.diagram.exportDiagram(exportOptions);
   }
 
-  public saveDiagram(): void {
+  /*public saveDiagram(): void {
     this.connectionService.saveDiagram(this.diagram.saveDiagram());
-  }
+  }*/
 
   public selectionChange(args: ISelectionChangeEventArgs): void {
     if(args.state === 'Changed'){
@@ -213,15 +213,16 @@ public clicked(args : ClickEventArgs){
           this.printDiagram(args);
           break;
       case 'Save Diagram':
-          console.log("AcA");
-          this.diagramService.saveDiagramBD({
+          /*this.diagramService.saveDiagramBD({
             roomEntityId: parseInt(this.room),
-            diagram: this.diagram.saveDiagram(),
-          });
-          //this.download(this.diagram.saveDiagram());
+            diagram: this.diagram.saveDiagram(
+            ),
+          });*/
+          this.download(this.diagram.saveDiagram());
           break;
       case 'Open Diagram':
-        document.getElementsByClassName('e-file-select-wrap')[0].querySelector('button').click();
+        //
+        console.log('open diagram');
         break;
   }
   this.diagram.dataBind();
@@ -484,8 +485,32 @@ public printDiagram(args){
       a.remove();
   }
 }
-public onUploadSuccess(args: { [key: string]: Object }): void {
+/*public onUploadSuccess(args: { [key: string]: Object }): void {
+  debugger
+  let file1: { [key: string]: Object } = args.file as { [key: string]: Object };
+  let file: Blob = file1.rawFile as Blob;
+  let reader: FileReader = new FileReader();
+  reader.readAsText(file);
+  reader.onloadend = this.loadDiagram.bind(this);
+}*/
+
+onFileSelected(event: any): void {
+  const file: File = event.target.files[0];
   
+  if (file) {
+    // Aquí puedes trabajar con el archivo seleccionado, por ejemplo, cargarlo o procesarlo
+    const reader = new FileReader();
+
+    reader.onload = (event) => {
+      const fileContents: string = event.target.result as string;
+      this.diagram?.loadDiagram(fileContents);
+      this.connectionService.emitEvent(this.diagram.saveDiagram());
+    };
+
+    reader.readAsText(file);
+    const inputElement = event.target as HTMLInputElement;
+    inputElement.value = '';
+  }
 }
 
 public loadDiagram(event: ProgressEvent): void {

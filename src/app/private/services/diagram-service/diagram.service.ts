@@ -382,7 +382,24 @@ export class DiagramService {
 
   async saveDiagramBD(diagramRoom: RoomDiagramI):Promise<any> {
     console.log(diagramRoom);
-    return await this.http.post('https://backend-pirzarra.onrender.com/api/room/save-diagram', diagramRoom).subscribe();
+    const len = diagramRoom.diagram.length;
+    console.log(len);
+    const data = {
+      roomEntityId: diagramRoom.roomEntityId,
+      diagram1: '',
+      diagram2: '',
+      diagram3: '',
+    }
+    const threshold = len / 3; // Adjust threshold as needed
+
+    if (len > threshold) {
+      const chunkSize = Math.floor(len / 3);
+
+      data.diagram1 = diagramRoom.diagram.substring(0, chunkSize);
+      data.diagram2 = diagramRoom.diagram.substring(chunkSize, chunkSize * 2);
+      data.diagram3 = diagramRoom.diagram.substring(chunkSize * 2);
+    }
+    return await this.http.post('https://backend-pirzarra.onrender.com/api/room/save-diagram', data).subscribe();
   }
   loadDiagramaDB(id: number){
     console.log('loadDiagramaDB');
