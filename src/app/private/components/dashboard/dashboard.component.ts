@@ -44,4 +44,9 @@ export class DashboardComponent implements OnInit, AfterViewInit {
   onPaginateRooms(pageEvent: PageEvent) {
     this.roomService.emitPaginateRooms(pageEvent.pageSize, pageEvent.pageIndex);
   }
+
+  logout(){
+    this.authService.logout();
+    this.router.navigate(['/login']);
+  }
 }

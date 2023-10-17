@@ -112,7 +112,7 @@ export interface ExtendedSocketIoConfig extends SocketIoConfig {
 }
 
 export const configRoom: ExtendedSocketIoConfig  = { 
-  url: 'http://localhost:5000/room',
+  url: 'https://backend-pirzarra.onrender.com/room',
   options: {
     transportOptions: {
       polling: {

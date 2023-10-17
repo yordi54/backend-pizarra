@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import {
   ConnectorConstraints,
@@ -17,6 +17,7 @@ import { UserI } from 'src/app/models/user.interface';
 import { ConnectionService } from '../../services/connection-service/connection.service';
 import { DiagramService } from '../../services/diagram-service/diagram.service';
 import { ClickEventArgs, ItemModel, MenuEventArgs, ToolbarComponent } from '@syncfusion/ej2-angular-navigations';
+import { RoomDiagramI } from 'src/app/models/diagram.interface';
 
 @Component({
   selector: 'app-room',
@@ -24,7 +25,8 @@ import { ClickEventArgs, ItemModel, MenuEventArgs, ToolbarComponent } from '@syn
   styleUrls: ['./room.component.css'],
   providers: [PrintAndExportService],
 })
-export class RoomComponent {
+//implements ngoninit
+export class RoomComponent implements OnInit  {
   participants: UserI[] = [];
   nameRoom: string = '';
   dataRoom: object = {};
@@ -44,6 +46,15 @@ export class RoomComponent {
     this.dataRoom = this.router.getCurrentNavigation().extras.state;
     this.participants = this.dataRoom['users'];
     this.nameRoom = this.dataRoom['name'];
+  }
+  ngOnInit(): void {
+    this.diagramService.loadDiagramaDB(parseInt(this.room)).subscribe((res: RoomDiagramI) => {
+      console.log(res);
+      this.diagram?.loadDiagram(res.diagram);
+    },
+    (err) => {
+      console.log(err);
+    });
   }
 
   @ViewChild('diagram', { static: false })
@@ -202,7 +213,12 @@ public clicked(args : ClickEventArgs){
           this.printDiagram(args);
           break;
       case 'Save Diagram':
-          this.download(this.diagram.saveDiagram());
+          console.log("AcA");
+          this.diagramService.saveDiagramBD({
+            roomEntityId: parseInt(this.room),
+            diagram: this.diagram.saveDiagram(),
+          });
+          //this.download(this.diagram.saveDiagram());
           break;
       case 'Open Diagram':
         document.getElementsByClassName('e-file-select-wrap')[0].querySelector('button').click();

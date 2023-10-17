@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://backend-pizarra.azurewebsites.net/api',
+  url: 'https://backend-pirzarra.onrender.com/api',
 };
 
 /*

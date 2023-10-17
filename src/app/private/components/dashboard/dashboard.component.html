@@ -1,8 +1,22 @@
 <div class="container">
-  <div class="register">
-    <a [routerLink]="['../login']">ir A La Página De Registro</a>
-  </div>
-  <mat-card>
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span
+        class="mat-h1"
+        style="
+          margin-left: auto;
+          margin-right: auto;
+          margin-top: auto;
+          margin-bottom: auto;
+        "
+      >
+        Diagramador | Primer Parcial
+      </span>
+      
+    <mat-button color="primary" style="cursor: pointer;" (click)="logout()">Cerrar sesión</mat-button>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <mat-card style="margin-top: 80px;">
     <div style="display: flex; flex-direction: row">
       <div>
         <div>

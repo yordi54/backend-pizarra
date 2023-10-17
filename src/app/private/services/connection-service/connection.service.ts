@@ -8,7 +8,7 @@ export class ConnectionService extends Socket {
   @Output() outEvent: EventEmitter<any> = new EventEmitter();
   constructor() {
     super({
-      url: 'http://localhost:5000/connection',
+      url: 'https://backend-pirzarra.onrender.com/connection',
     });
     this.listen();
   }

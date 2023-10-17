@@ -34,4 +34,9 @@ export class AuthService {
     const decodedToken = this.jwtService.decodeToken();
     return decodedToken.user;
   }
+
+  //hacer logout
+  logout() {
+    localStorage.removeItem('session_token');
+  }
 }

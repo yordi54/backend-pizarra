@@ -19,7 +19,7 @@ import { tokenGetter } from './config/config';
     HttpClientModule,
     BrowserAnimationsModule,
     MatSnackBarModule,
-    JwtModule.forRoot({ config: { tokenGetter: tokenGetter, allowedDomains: ['backend-pizarra.azurewebsites.net'] } }),
+    JwtModule.forRoot({ config: { tokenGetter: tokenGetter, allowedDomains: ['backend-pirzarra.onrender.com'] } }),
   ],
   providers: [],
   bootstrap: [AppComponent],
