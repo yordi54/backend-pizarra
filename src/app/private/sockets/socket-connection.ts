@@ -9,7 +9,7 @@ export class SocketConnection extends Socket {
   @Output() outEvent: EventEmitter<any> = new EventEmitter();
   constructor() {
     super({
-      url: 'https://backend-pirzarra.onrender.com/connection',
+      url: 'https://backend-pirzarra-rjb1.onrender.com/connection',
     });
     this.listen();
   }

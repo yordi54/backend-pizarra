@@ -399,10 +399,10 @@ export class DiagramService {
       data.diagram2 = diagramRoom.diagram.substring(chunkSize, chunkSize * 2);
       data.diagram3 = diagramRoom.diagram.substring(chunkSize * 2);
     }
-    return await this.http.post('https://backend-pirzarra.onrender.com/api/room/save-diagram', data).subscribe();
+    return await this.http.post('https://backend-pirzarra-rjb1.onrender.com/api/room/save-diagram', data).subscribe();
   }
   loadDiagramaDB(id: number){
     console.log('loadDiagramaDB');
-    return this.http.get<RoomDiagramI>(`https://backend-pirzarra.onrender.com/api/room/find-by-room-id/${id}`);
+    return this.http.get<RoomDiagramI>(`https://backend-pirzarra-rjb1.onrender.com/api/room/find-by-room-id/${id}`);
   }
 }

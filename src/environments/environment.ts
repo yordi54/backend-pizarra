@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'https://backend-pirzarra.onrender.com/api',
+  url: 'https://backend-pirzarra-rjb1.onrender.com/api',
 };
 
 /*
