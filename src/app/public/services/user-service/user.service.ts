@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserI } from '../../../models/user.interface';
 import { catchError, Observable, tap, throwError } from 'rxjs';
@@ -13,7 +13,11 @@ export class UserService {
 
   findByUsername(username: string): Observable<UserI[]> {
     return this.http.get<UserI[]>(
-      `${environment.url}/users/find-by-username?username=${username}`
+      `${environment.url}/users/find-by-username?username=${username}`,{
+        headers: new HttpHeaders({
+          Authorization: `Bearer ${localStorage.getItem('session_token')}`,
+        }),
+      }
     );
   }
 

@@ -50,7 +50,7 @@ export class  RoomService {
       `${environment.url}/users/is-member-of-room?roomId=${roomId}`,
       {
         headers: new HttpHeaders({
-          Authorization: `${localStorage.getItem('session_token')}`,
+          Authorization: `Bearer ${localStorage.getItem('session_token')}`,
         }),
       }
     );
